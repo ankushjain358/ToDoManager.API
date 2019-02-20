@@ -5,11 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Enums\" />
+    <Folder Include="Infrastructure\Exceptions\" />
+    <Folder Include="Models\Account\Read\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
 </Project>
