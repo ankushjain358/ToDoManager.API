@@ -10,7 +10,7 @@ using ToDoManager.Infrastructure;
 
 namespace ToDoManager.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -23,6 +23,7 @@ namespace ToDoManager.Controllers
 
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(LoginResponse))]
+        [Route("login")]
         public IActionResult Login(LoginModel loginModel)
         {
             LoginResponse loginResponse = _accountService.Login(loginModel);
@@ -34,7 +35,8 @@ namespace ToDoManager.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(200, Type = typeof(LoginResponse))]
+        [ProducesResponseType(200)]
+        [Route("register")]
         public IActionResult Register(RegistrationModel registrationModel)
         {
             _accountService.RegiterUser(registrationModel);

@@ -10,7 +10,7 @@ using ToDoManager.Service;
 
 namespace ToDoManager.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/tasks")]
     [ApiController]
     [Authorize]
     public class TasksController : ControllerBase
@@ -23,12 +23,17 @@ namespace ToDoManager.Controllers
         }
 
         [HttpPost]
+        [Route("create")]
+        [ProducesResponseType(200)]
         public IActionResult CreateTaskList(CreateUpdateTaskListModel taskListModel)
         {
             _taskService.CreateTaskList(taskListModel);
             return Ok();
         }
 
+
+        [Route("list/{userId}")]
+        [ProducesResponseType(200, Type = typeof(List<TaskListModel>))]
         public IActionResult GetTaskList(int userId)
         {
             var tasklists = _taskService.GetTaskList(userId);
