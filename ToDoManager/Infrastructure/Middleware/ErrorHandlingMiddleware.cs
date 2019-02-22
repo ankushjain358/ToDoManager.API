@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,10 @@ namespace ToDoManager.Infrastructure.Middleware
 
                 var response = new ErrorResponse((HttpStatusCode)context.Response.StatusCode, errorMessage);
 
-                var json = JsonConvert.SerializeObject(response);
+                var json = JsonConvert.SerializeObject(response, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                });
 
                 await context.Response.WriteAsync(json);
             }

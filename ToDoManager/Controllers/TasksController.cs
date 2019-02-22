@@ -13,7 +13,7 @@ namespace ToDoManager.Controllers
     [Route("api/tasks")]
     [ApiController]
     [Authorize]
-    public class TasksController : ControllerBase
+    public class TasksController : BaseController
     {
         private ITaskService _taskService;
 
@@ -27,6 +27,7 @@ namespace ToDoManager.Controllers
         [ProducesResponseType(200)]
         public IActionResult CreateTaskList(CreateUpdateTaskListModel taskListModel)
         {
+            taskListModel.UserId = GetCurrentUserId();
             _taskService.CreateTaskList(taskListModel);
             return Ok();
         }
