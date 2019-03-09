@@ -13,8 +13,8 @@ namespace ToDoManager.Infrastructure
         public DBToDomainProfile()
         {
             CreateMap<Tasks, TaskModel>();
-            CreateMap<TaskLists, TaskListModel>();
-
+            CreateMap<Categories, CategoryModel>()
+                .ForMember(dest => dest.TaskList, opt => opt.MapFrom(src => src.Tasks));
         }
     }
 }

@@ -21,24 +21,25 @@ namespace ToDoManager.Controllers
         {
             _taskService = taskService;
         }
+       
 
         [HttpPost]
         [Route("create")]
         [ProducesResponseType(200)]
-        public IActionResult CreateTaskList(CreateUpdateTaskListModel taskListModel)
+        public  IActionResult CreateTask(CreateUpdateTaskModel taskModel)
         {
-            taskListModel.UserId = GetCurrentUserId();
-            _taskService.CreateTaskList(taskListModel);
+            _taskService.CreateTask(taskModel);
             return Ok();
         }
 
-
-        [Route("list/{userId}")]
-        [ProducesResponseType(200, Type = typeof(List<TaskListModel>))]
-        public IActionResult GetTaskList(int userId)
+        [HttpPost]
+        [Route("update")]
+        [ProducesResponseType(200)]
+        public IActionResult UpdateTask(CreateUpdateTaskModel taskModel)
         {
-            var tasklists = _taskService.GetTaskList(userId);
-            return Ok(tasklists);
+            _taskService.UpdateTask(taskModel);
+            return Ok();
         }
+
     }
 }

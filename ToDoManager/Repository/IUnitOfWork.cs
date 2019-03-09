@@ -10,7 +10,7 @@ namespace ToDoManager.Repository
     {
         IGenericRepository<Users> UserRepository { get; }
         IGenericRepository<Tasks> TaskRepository { get; }
-        IGenericRepository<TaskLists> TaskListRepository { get; }
+        IGenericRepository<Categories> CategoryRepository { get; }
         void SaveChanges();
     }
 }

@@ -12,8 +12,12 @@ namespace ToDoManager.Infrastructure
     {
         public DomainToDBProfile()
         {
-            CreateMap<CreateUpdateTaskModel, Tasks>();
-            CreateMap<CreateUpdateTaskListModel, TaskLists>();
+            CreateMap<CreateUpdateTaskModel, Tasks>().AfterMap((src, dest) =>
+            {
+                dest.CreatedOn = DateTime.Now;
+                dest.IsCompleted = false;
+            });
+            CreateMap<CreateUpdateCategoryModel, Categories>();
         }
     }
 }

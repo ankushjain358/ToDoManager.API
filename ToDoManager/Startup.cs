@@ -60,6 +60,8 @@ namespace ToDoManager
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
 
             services.AddScoped<IAccessTokenGenerator, JWTAccessTokenGenerator>();
             services.AddScoped<IPasswordGenerator, PBKDF2PasswordGenerator>();
@@ -78,7 +80,7 @@ namespace ToDoManager
         {
             services.AddTransient<IValidator<LoginModel>, LoginValidator>();
             services.AddTransient<IValidator<RegistrationModel>, RegistrationValidator>();
-            services.AddTransient<IValidator<CreateUpdateTaskListModel>, CreateTaskListValidator>();
+            services.AddTransient<IValidator<CreateUpdateCategoryModel>, CreateCategoryValidator>();
         }
 
         private void ConfigureJWTAuthentication(IServiceCollection services, IConfigurationSection appSettingsSection)
@@ -120,7 +122,7 @@ namespace ToDoManager
             app.UseHttpsRedirection();
             app.UseAuthentication();
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200", "https://mytodomanager.azurewebsites.net").AllowAnyHeader().AllowAnyMethod()); //TODO: Hard code values
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMvc();
 

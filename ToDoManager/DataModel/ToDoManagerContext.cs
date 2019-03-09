@@ -15,7 +15,7 @@ namespace ToDoManager.DataModel
         {
         }
 
-        public virtual DbSet<TaskLists> TaskLists { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
@@ -23,21 +23,21 @@ namespace ToDoManager.DataModel
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=localhost;Database=ToDoManager;User ID=sa;Password=Admin123$");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TaskLists>(entity =>
+            modelBuilder.Entity<Categories>(entity =>
             {
-                entity.Property(e => e.ListName)
+                entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.TaskLists)
+                    .WithMany(p => p.Categories)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TaskLists_Users");
@@ -51,11 +51,11 @@ namespace ToDoManager.DataModel
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.HasOne(d => d.TaskList)
+                entity.HasOne(d => d.Category)
                     .WithMany(p => p.Tasks)
-                    .HasForeignKey(d => d.TaskListId)
+                    .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Tasks_TaskLists");
+                    .HasConstraintName("FK_Tasks_Categories");
             });
 
             modelBuilder.Entity<Users>(entity =>

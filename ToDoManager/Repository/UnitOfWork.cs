@@ -7,7 +7,7 @@ namespace ToDoManager.Repository
         private ToDoManagerContext _context;
         private GenericRepository<Users> _userRepository;
         private GenericRepository<Tasks> _taskRepository;
-        private GenericRepository<TaskLists> _tasklistRepository;
+        private GenericRepository<Categories> _categoryRepository;
 
 
         public UnitOfWork(ToDoManagerContext context)
@@ -39,15 +39,15 @@ namespace ToDoManager.Repository
             }
         }
 
-        public IGenericRepository<TaskLists> TaskListRepository
+        public IGenericRepository<Categories> CategoryRepository
         {
             get
             {
-                if (this._tasklistRepository == null)
+                if (this._categoryRepository == null)
                 {
-                    this._tasklistRepository = new GenericRepository<TaskLists>(_context);
+                    this._categoryRepository = new GenericRepository<Categories>(_context);
                 }
-                return _tasklistRepository;
+                return _categoryRepository;
             }
         }
 

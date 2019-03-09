@@ -3,6 +3,9 @@ In this file, we have provided all the references that we have used to implement
 ## JWT Token Implementation
 http://jasonwatmore.com/post/2018/08/14/aspnet-core-21-jwt-authentication-tutorial-with-example-api
 
+## Database First using Entity Framework Core
+https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db
+
 ## Error Handling
 
 https://stackoverflow.com/a/38935583/1273882

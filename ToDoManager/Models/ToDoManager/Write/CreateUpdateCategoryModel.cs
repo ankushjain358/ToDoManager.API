@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace ToDoManager.Models
 {
-    public class CreateUpdateTaskListModel
+    public class CreateUpdateCategoryModel
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string ListName { get; set; }
+        public string Name { get; set; }
     }
 }

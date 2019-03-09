@@ -27,36 +27,10 @@ namespace ToDoManager.Service
             _unitOfWork.SaveChanges();
         }
 
-        public void CreateTaskList(CreateUpdateTaskListModel taskListModel)
-        {
-            var taskListToCreate = _mapper.Map<TaskLists>(taskListModel);
-            _unitOfWork.TaskListRepository.Insert(taskListToCreate);
-            _unitOfWork.SaveChanges();
-        }
-
-        public List<TaskListModel> GetTaskList(int userId)
-        {
-            var tasklists = _unitOfWork.TaskListRepository.Get(tasklist => tasklist.UserId == userId);
-            return _mapper.Map<List<TaskListModel>>(tasklists);
-        }
-
-        public List<TaskModel> GetTasks(int taskListId)
-        {
-            var tasks = _unitOfWork.TaskRepository.Get(task => task.TaskListId == taskListId);
-            return _mapper.Map<List<TaskModel>>(tasks);
-        }
-
         public void UpdateTask(CreateUpdateTaskModel taskModel)
         {
             var taskToUpdate = _mapper.Map<Tasks>(taskModel);
             _unitOfWork.TaskRepository.Update(taskToUpdate);
-            _unitOfWork.SaveChanges();
-        }
-
-        public void UpdateTaskList(CreateUpdateTaskListModel taskListModel)
-        {
-            var taskListToUpdate = _mapper.Map<TaskLists>(taskListModel);
-            _unitOfWork.TaskListRepository.Update(taskListToUpdate);
             _unitOfWork.SaveChanges();
         }
     }

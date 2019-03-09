@@ -7,7 +7,7 @@ namespace ToDoManager.DataModel
     {
         public Users()
         {
-            TaskLists = new HashSet<TaskLists>();
+            Categories = new HashSet<Categories>();
         }
 
         public int Id { get; set; }
@@ -15,6 +15,6 @@ namespace ToDoManager.DataModel
         public string Password { get; set; }
         public string FullName { get; set; }
 
-        public ICollection<TaskLists> TaskLists { get; set; }
+        public ICollection<Categories> Categories { get; set; }
     }
 }
