@@ -28,6 +28,25 @@ namespace ToDoManager.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("update")]
+        [ProducesResponseType(200)]
+        public IActionResult UpdateCategory(CreateUpdateCategoryModel categoryModel)
+        {
+            categoryModel.UserId = GetCurrentUserId();
+            _categoryService.UpdateCategory(categoryModel);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        [ProducesResponseType(200)]
+        public IActionResult DeleteCategory(int id)
+        {
+            _categoryService.DeleteCategory(id);
+            return Ok();
+        }
+
 
         [Route("list")]
         [ProducesResponseType(200, Type = typeof(List<CategoryModel>))]

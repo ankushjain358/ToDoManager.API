@@ -33,7 +33,7 @@ namespace ToDoManager.Service
             var categories = _unitOfWork.CategoryRepository.Get(category => category.UserId == userId);
             return _mapper.Map<List<CategoryModel>>(categories);
         }
-       
+
         public void UpdateCategory(CreateUpdateCategoryModel categoryModel)
         {
             var categoryToUpdate = _mapper.Map<Categories>(categoryModel);
@@ -49,5 +49,41 @@ namespace ToDoManager.Service
             return _mapper.Map<CategoryModel>(categoryDetail);
         }
 
+        public void DeleteCategory(int id)
+        {
+            var categoryDetail = _unitOfWork.CategoryRepository.Get(category => category.Id == id,
+               includeProperties: new Expression<Func<Categories, object>>[] { x => x.Tasks }).FirstOrDefault();
+
+            if (categoryDetail != null)
+            {
+                if (categoryDetail.Tasks != null)
+                {
+                    foreach (var task in categoryDetail.Tasks)
+                    {
+                        _unitOfWork.TaskRepository.Delete(task);
+                    }
+                    _unitOfWork.CategoryRepository.Delete(categoryDetail);
+                    _unitOfWork.SaveChanges();
+                }
+            }
+        }
+
+        public void CreateDefaultCategoriesForNewUser(int userId)
+        {
+            Categories category1 = new Categories
+            {
+                Name = "Personal Tasks",
+                UserId = userId
+            };
+            Categories category2 = new Categories
+            {
+                Name = "Office Tasks",
+                UserId = userId
+            };
+
+            _unitOfWork.CategoryRepository.Insert(category1);
+            _unitOfWork.CategoryRepository.Insert(category2);
+            _unitOfWork.SaveChanges();
+        }
     }
 }

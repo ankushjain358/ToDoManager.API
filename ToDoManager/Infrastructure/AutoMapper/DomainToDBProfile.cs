@@ -15,7 +15,6 @@ namespace ToDoManager.Infrastructure
             CreateMap<CreateUpdateTaskModel, Tasks>().AfterMap((src, dest) =>
             {
                 dest.CreatedOn = DateTime.Now;
-                dest.IsCompleted = false;
             });
             CreateMap<CreateUpdateCategoryModel, Categories>();
         }

@@ -15,10 +15,13 @@ namespace ToDoManager.Controllers
     public class AccountController : ControllerBase
     {
         private IAccountService _accountService;
+        private ICategoryService _categoryService;
 
-        public AccountController(IAccountService accountService)
+
+        public AccountController(IAccountService accountService, ICategoryService categoryService)
         {
             _accountService = accountService;
+            _categoryService = categoryService;
         }
 
         [HttpPost]
@@ -39,7 +42,10 @@ namespace ToDoManager.Controllers
         [Route("register")]
         public IActionResult Register(RegistrationModel registrationModel)
         {
-            _accountService.RegiterUser(registrationModel);
+            _accountService.RegiterUser(registrationModel, out int userId);
+
+            _categoryService.CreateDefaultCategoriesForNewUser(userId);
+
             return Ok();
         }
     }

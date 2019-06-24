@@ -10,5 +10,8 @@ namespace ToDoManager.Service
     {
         void CreateTask(CreateUpdateTaskModel taskModel);
         void UpdateTask(CreateUpdateTaskModel taskModel);
+        void UpdateTitle(CreateUpdateTaskModel taskModel);
+        void UpdateStatus(UpdateTaskStatusModel updateTaskStatusModel);
+        void DeleteTask(int id);
     }
 }

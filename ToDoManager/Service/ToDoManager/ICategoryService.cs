@@ -7,7 +7,9 @@ namespace ToDoManager.Service
     {
         void CreateCategory(CreateUpdateCategoryModel categoryModel);
         void UpdateCategory(CreateUpdateCategoryModel categoryModel);
+        void DeleteCategory(int id);
         List<CategoryModel> GetCategoryList(int userId);
         CategoryModel GetCategoryDetail(int id);
+        void CreateDefaultCategoriesForNewUser(int userId);
     }
 }

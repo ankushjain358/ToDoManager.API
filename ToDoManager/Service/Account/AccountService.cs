@@ -42,7 +42,7 @@ namespace ToDoManager.Service
             return null;
         }
 
-        public void RegiterUser(RegistrationModel registrationModel)
+        public void RegiterUser(RegistrationModel registrationModel, out int userId)
         {
             if (_unitOfWork.UserRepository.Get(item => item.Email == registrationModel.Email).Any())
             {
@@ -57,6 +57,8 @@ namespace ToDoManager.Service
             };
             _unitOfWork.UserRepository.Insert(user);
             _unitOfWork.SaveChanges();
+
+            userId = user.Id;
         }
     }
 }

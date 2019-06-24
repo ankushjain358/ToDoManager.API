@@ -21,12 +21,12 @@ namespace ToDoManager.Controllers
         {
             _taskService = taskService;
         }
-       
+
 
         [HttpPost]
         [Route("create")]
         [ProducesResponseType(200)]
-        public  IActionResult CreateTask(CreateUpdateTaskModel taskModel)
+        public IActionResult CreateTask(CreateUpdateTaskModel taskModel)
         {
             _taskService.CreateTask(taskModel);
             return Ok();
@@ -37,9 +37,26 @@ namespace ToDoManager.Controllers
         [ProducesResponseType(200)]
         public IActionResult UpdateTask(CreateUpdateTaskModel taskModel)
         {
-            _taskService.UpdateTask(taskModel);
+            _taskService.UpdateTitle(taskModel);
             return Ok();
         }
 
+        [HttpPost]
+        [Route("update-task-status")]
+        [ProducesResponseType(200)]
+        public IActionResult UpdateTaskStatus(UpdateTaskStatusModel updateTaskStatusModel)
+        {
+            _taskService.UpdateStatus(updateTaskStatusModel);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("delete-task/{id}")]
+        [ProducesResponseType(200)]
+        public IActionResult DeleteTask([FromRoute]int id)
+        {
+            _taskService.DeleteTask(id);
+            return Ok();
+        }
     }
 }

@@ -6,6 +6,6 @@ namespace ToDoManager.Service
     {
         LoginResponse Login(LoginModel loginModel);
 
-        void RegiterUser(RegistrationModel registrationModel);
+        void RegiterUser(RegistrationModel registrationModel, out int userId);
     }
 }
