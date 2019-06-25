@@ -1,3 +1,12 @@
+# About Project
+ToDoManager.API is an ASP.NET Core Web API project. We have created this API project so that we can use it with our Angular Client Application (or Any other application). 
+
+## Technologies:
+* **IDE** - Visual Studio 2017
+* **Project Type** - ASP.NET Core 2.2
+
+
+
 # References
 In this file, we have provided all the references that we have used to implement core functionalities to build this application.
 ## JWT Token Implementation
